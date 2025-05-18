@@ -6,39 +6,38 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 
-export type InputType = {
+type InputType = {
   register: UseFormRegister<any>;
   handleSubmit: UseFormHandleSubmit<any, any>;
   watch: UseFormWatch<any>;
   errors: FieldErrors;
 };
-const Textfiled = ({
+const TextArea = ({
   onchange,
   placeholder,
-  required = false,
   validationName,
   input,
   value,
 }: {
-  onchange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onchange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder: string;
-  required: boolean;
   validationName: string;
   input: InputType;
   value: string | undefined;
 }) => {
   return (
     <div>
-      <input
-        className={`border-2 p-2 rounded-md mb-1 w-[35%] ${
+      <textarea
+        className={`border-2 p-2 rounded-md mb-1 w-full h-[200px] ${
           input.errors[validationName] ? "border-red-500" : "border-gray-300"
         }`}
         {...input.register(validationName, {
           required: true,
           onChange: onchange,
+          value: value,
         })}
         placeholder={placeholder}
-      />
+      ></textarea>
       <div className="h-5">
         {input.errors[validationName]?.type === "required" && !value && (
           <div className="text-red-500 text-sm">This field is required</div>
@@ -48,4 +47,4 @@ const Textfiled = ({
   );
 };
 
-export default Textfiled;
+export default TextArea;

@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -8,7 +7,7 @@
 
   /* color-scheme: light dark; */
   /* color: rgba(255, 255, 255, 0.87); */
-  background-color: #242424;
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -50,6 +49,9 @@ button {
   background-color: rgb(10, 10, 10);
   cursor: pointer;
   transition: border-color 0.25s;
+  min-width: 100px;
+  min-height: 45px;
+  max-height: 45px;
 }
 
 button:hover {
