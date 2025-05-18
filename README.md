@@ -15,6 +15,10 @@ npm run build
 npm run preview
 
 
+Credintial
+email:: shikharkhadka@gmail.com
+password: password
+
 ✨ Features
 Login: Requires valid credentials to access the system.
 
