@@ -19,6 +19,7 @@ const Textfiled = ({
   validationName,
   input,
   value,
+  fullWidth = false,
 }: {
   onchange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
@@ -26,13 +27,13 @@ const Textfiled = ({
   validationName: string;
   input: InputType;
   value: string | undefined;
+  fullWidth?: boolean
 }) => {
   return (
     <div>
       <input
-        className={`border-2 p-2 rounded-md mb-1 w-[35%] ${
-          input.errors[validationName] ? "border-red-500" : "border-gray-300"
-        }`}
+        className={`border-2 p-2 rounded-md mb-1 ${ fullWidth ? "w-full" : "w-[35%]"}  ${input.errors[validationName] ? "border-red-500" : "border-gray-300"
+          }`}
         {...input.register(validationName, {
           required: true,
           onChange: onchange,

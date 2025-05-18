@@ -27,7 +27,7 @@ export const Category = () => {
   }, [dispatch]);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen w-full ">
       <div className="text-lg font-semibold mb-2">Category</div>
       <div className="flex gap-4">
         <Textfiled
@@ -37,10 +37,12 @@ export const Category = () => {
           required={true}
           validationName="category"
           value={category}
+          fullWidth
         />
         <Button title="Add Category" onClick={onClick} />
       </div>
       <div className="py-2  mx-auto space-y-2">
+        <div>Category List</div>
         {state.map((e, index) => (
           <div
             key={index}

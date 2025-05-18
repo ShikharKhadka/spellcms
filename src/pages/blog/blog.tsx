@@ -42,7 +42,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 w-full min-h-screen">
       <div className="text-3xl font-bold text-gray-800 mb-6 ">Blog</div>
       <div className="mb-6">
         <div className="flex gap-3">

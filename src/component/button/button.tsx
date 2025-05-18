@@ -6,7 +6,7 @@ const Button = ({
   onClick?: () => void;
 }) => {
   return (
-    <button onClick={onClick} type="submit" className=" px-4 py-2 rounded">
+    <button  className="px-4 py-2 rounded" onClick={onClick} type="submit">
       {title}
     </button>
   );
