@@ -39,7 +39,6 @@ const Blog = () => {
     if (category != null) {
       dispatch(filterStatus({ key: "category", value: category?.name ?? "" }));
     }
-    // dispatch(filterStatus(value.toLowerCase()));
   };
 
   return (
