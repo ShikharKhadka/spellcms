@@ -1,15 +1,24 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Sider = () => {
+    const navigate = useNavigate();
     return (
         <div className='flex flex-col'>
-            <NavLink to={"/blog"}>Blog</NavLink>
-            <NavLink to={"/category"}>Category</NavLink>
-            <NavLink to={"/author"}>Author</NavLink>
-            <NavLink to={"/login"}>Logout</NavLink>
+            <Nav name='Blog' to='/blog' />
+            <Nav name='Category' to='/category' />
+            <Nav name='Author' to='/author' />
+            <button className='m-3' onClick={() => {
+                navigate("/login", { replace: true });
+                localStorage.clear();
+            }} >Logout</button>
         </div>
     )
+}
+
+const Nav = ({ name, to }: { name: string, to: string }) => {
+    return (<NavLink className={({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "bg-amber-400" : ""
+    } to={to}>{name}</NavLink>)
 }
 
 export default Sider
