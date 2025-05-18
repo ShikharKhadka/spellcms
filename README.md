@@ -15,7 +15,7 @@ npm run build
 npm run preview
 
 
-Credintial
+Credential
 email:: shikharkhadka@gmail.com
 password: password
 
