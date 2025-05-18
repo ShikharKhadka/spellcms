@@ -47,6 +47,24 @@ export const fetchBlog = async (): Promise<BlogI[] | string> => {
   }
 };
 
+export const deleteBlog = async ({ id }: { id: number }): Promise<BlogI| null> => {
+  const baseUrl = "https://68272e2c6b7628c5290f58e2.mockapi.io/";
+  const endpoints = `blog/${id}`;
+  const url = `${baseUrl}${endpoints}`;
+  try {
+    const response = await fetch(url, { method: "DELETE" });
+
+    if (response.status == 200) {
+      const responseData = await response.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (_) {
+    return null;
+  }
+};
+
 export const searchBlog = async ({
   search,
   type,

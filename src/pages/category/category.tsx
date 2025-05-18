@@ -43,14 +43,14 @@ export const Category = () => {
       </div>
       <div className="py-2  mx-auto space-y-2">
         <div>Category List</div>
-        {state.map((e, index) => (
+        {state.length  > 0 ? state.map((e, index) => (
           <div
             key={index}
             className="px-4 py-2 border border-gray-200 rounded-md shadow-sm bg-white hover:bg-gray-50 transition-colors"
           >
             <div className="text-gray-800 font-medium">{e.name}</div>
           </div>
-        ))}
+        )) : <div>Data not Found</div>}
       </div>
     </div>
   );

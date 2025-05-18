@@ -72,31 +72,31 @@ export const AddBlog = () => {
   }, [blog.status]);
 
   return (
-    <form onSubmit={input.handleSubmit(onSubmit)}>
-      <div className=" mx-auto p-6 rounded-xl space-y-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Add Blog</h2>
-        <div>
-          <Textfiled
+    <div  className="w-full">
+      <form onSubmit={input.handleSubmit(onSubmit)}>
+        <div className=" mx-auto p-6 rounded-xl space-y-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Add Blog</h2>
+          <div>
+            <Textfiled
+              input={input}
+              onchange={(e) => {
+                setBlog({ ...blog, title: e.target.value });
+              }}
+              placeholder="Title"
+              required={true}
+              validationName="title"
+              value={blog.title}
+            />
+          </div>
+          <TextArea
             input={input}
             onchange={(e) => {
-              setBlog({ ...blog, title: e.target.value });
+              setBlog({ ...blog, body: e.target.value });
             }}
-            placeholder="Title"
-            required={true}
-            validationName="title"
-            value={blog.title}
+            placeholder="Body"
+            validationName="body"
+            value={blog.body}
           />
-        </div>
-        <TextArea
-          input={input}
-          onchange={(e) => {
-            setBlog({ ...blog, body: e.target.value });
-          }}
-          placeholder="Body"
-          validationName="body"
-          value={blog.body}
-        />
-        <div className="h-[50px] ">
           <Textfiled
             input={input}
             onchange={(e) => {
@@ -107,114 +107,114 @@ export const AddBlog = () => {
             validationName="author"
             value={blog.author}
           />
-        </div>
-        <Dropdown
-          input={input}
-          defaultOption="Category"
-          validationName="category"
-          value={blog.category}
-          onchange={(e) => {
-            const category = state.find((f) => f.id == e.target.value);
-            setBlog({ ...blog, category: category?.name ?? "" });
-          }}
-          option={state}
-          objectKey="id"
-          objectValue="name"
-        />
-        <div
-          onClick={() => {
-            setIsOn(!isOn);
-          }}
-          className={`w-12 h-6 rounded-full cursor-pointer relative transition-colors duration-200 ${
-            isOn ? "bg-blue-500" : "bg-gray-300"
-          }`}
-        >
-          <div
-            className={`w-6 h-6 bg-white rounded-full shadow absolute top-0 transition-transform duration-300 ${
-              isOn ? "translate-x-6" : "translate-x-0"
-            }`}
+          <Dropdown
+            input={input}
+            defaultOption="Category"
+            validationName="category"
+            value={blog.category}
+            onchange={(e) => {
+              const category = state.find((f) => f.id == e.target.value);
+              setBlog({ ...blog, category: category?.name ?? "" });
+            }}
+            option={state}
+            objectKey="id"
+            objectValue="name"
           />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Tags
-          </label>
-          <input
-            className="w-full md:w-30 px-4 py-2 rounded-lg border border-gray-300 shadow-sm
+          <div
+            onClick={() => {
+              setIsOn(!isOn);
+            }}
+            className={`w-12 h-6 rounded-full cursor-pointer relative transition-colors duration-200 ${isOn ? "bg-blue-500" : "bg-gray-300"
+              }`}
+          >
+            <div
+              className={`w-6 h-6 bg-white rounded-full shadow absolute top-0 transition-transform duration-300 ${isOn ? "translate-x-6" : "translate-x-0"
+                }`}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Tags
+            </label>
+            <input
+              className="w-full md:w-30 px-4 py-2 rounded-lg border border-gray-300 shadow-sm
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
                placeholder-gray-400 "
-            placeholder=" Enter Tag"
-            onChange={(e) => {
-              const value = e.target.value;
-              setTagInput(value);
-            }}
-            value={tagInput}
-          />
-          <span className="pl-2">
-            <button
-              type="button"
-              onClick={() => {
-                setTag([...tags, tagInput]);
-                setTagInput("");
-                setBlog({ ...blog, tags: tags });
+              placeholder=" Enter Tag"
+              onChange={(e) => {
+                const value = e.target.value;
+                setTagInput(value);
               }}
-            >
-              Add Tags
-            </button>
-          </span>
-          <div className="flex flex-wrap gap-2 p-2">
-            {tags.map((e, index) => (
-              <div className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded flex items-center gap-2">
-                <span>{`#${e}`}</span>
-                <div
-                  onClick={() => handleRemove(index)}
-                  className="text-red-500 hover:text-red-700 cursor-pointer text-base leading-none"
-                >
-                  ×
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <button
-            onClick={() => {
-              if (fileInputRef.current) {
-                fileInputRef.current.click();
-              }
-            }}
-          >
-            <input
-              ref={fileInputRef}
-              type="file"
-              hidden
-              onChange={handelFileChange}
+              value={tagInput}
             />
-            Upload Image
-          </button>
-          <div className="flex">
-            {fileList.length > 0 &&
-              fileList.map((e, index) => (
-                <div className="h-1/5 w-1/5 ">
-                  <div className="flex justify-end">
-                    <div
-                      className="cursor-pointer"
-                      onClick={() => removeImage(index)}
-                    >
-                      x
-                    </div>
+            <span className="pl-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setTag([...tags, tagInput]);
+                  setTagInput("");
+                  setBlog({ ...blog, tags: tags });
+                }}
+              >
+                Add Tags
+              </button>
+            </span>
+            <div className="flex flex-wrap gap-2 p-2">
+              {tags.map((e, index) => (
+                <div className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded flex items-center gap-2">
+                  <span>{`#${e}`}</span>
+                  <div
+                    onClick={() => handleRemove(index)}
+                    className="text-red-500 hover:text-red-700 cursor-pointer text-base leading-none"
+                  >
+                    ×
                   </div>
-                  <img src={URL.createObjectURL(e)}></img>
-                  <div>{e.name}</div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <button
+            type="button"
+              onClick={() => {
+                if (fileInputRef.current) {
+                  fileInputRef.current.click();
+                }
+              }}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                hidden
+                onChange={handelFileChange}
+              />
+              Upload Image
+            </button>
+            <div className="flex">
+              {fileList.length > 0 &&
+                fileList.map((e, index) => (
+                  <div className="h-1/5 w-1/5 ">
+                    <div className="flex justify-end">
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => removeImage(index)}
+                      >
+                        x
+                      </div>
+                    </div>
+                    <img src={URL.createObjectURL(e)}></img>
+                    <div>{e.name}</div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Button title="Post Blog" />
           </div>
         </div>
-        <div className="flex justify-center">
-          <Button title="Post Blog" />
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   );
 };

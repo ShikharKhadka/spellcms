@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchBlog, postBlog, searchBlog } from "../../services/services";
+import { deleteBlog, fetchBlog, postBlog, searchBlog } from "../../services/services";
 
 const initialState: BlogInitialStateI = {
   status: "loading",
@@ -35,6 +35,11 @@ export const post = createAsyncThunk(
 
 export const fetch = createAsyncThunk("users/fetchBlog", async () => {
   const response = await fetchBlog();
+  return response;
+});
+
+export const deleteB = createAsyncThunk("users/deleteBlog", async (id: number) => {
+  const response = await deleteBlog({ id });
   return response;
 });
 
@@ -121,6 +126,9 @@ const blogSlice = createSlice({
       .addCase(filterStatus.rejected, (state) => {
         state.status = "error";
         state.error = "Something went wrong";
+      }).addCase(deleteB.fulfilled, (state, action: PayloadAction<BlogI | null>) => {
+        const blogList = state.data.filter((e) => e.id != action.payload?.id);
+        state.data = blogList
       });
   },
 });

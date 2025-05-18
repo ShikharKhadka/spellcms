@@ -7,7 +7,7 @@ const Sider = () => {
             <NavLink to={"/blog"}>Blog</NavLink>
             <NavLink to={"/category"}>Category</NavLink>
             <NavLink to={"/author"}>Author</NavLink>
-
+            <NavLink to={"/login"}>Logout</NavLink>
         </div>
     )
 }
