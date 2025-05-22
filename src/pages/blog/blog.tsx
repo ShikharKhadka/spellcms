@@ -19,7 +19,6 @@ const Blog = () => {
   const categorystate = useSelector((e: RootState) => e.category.data);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const input = useInput<BlogI>();
 
   useEffect(() => {
     dispatch(fetch());
@@ -44,8 +43,8 @@ const Blog = () => {
       <div className="text-3xl font-bold text-gray-800 mb-6 ">Blog</div>
       <div className="mb-6">
         <div className="flex gap-3">
-          <button className="bg-blue-600 text-white px-5 py-2  rounded hover:bg-blue-700 transition" 
-          onClick={()=> navigate("/addBlog")}>
+          <button className="bg-blue-600 text-white px-5 py-2  rounded hover:bg-blue-700 transition"
+            onClick={() => navigate("/addBlog")}>
             Add Blog
           </button>
           <input

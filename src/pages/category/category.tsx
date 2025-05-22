@@ -5,9 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetch, post } from "./categoryslice";
 import { AppDispatch, RootState } from "../../store/store";
 import Button from "../../component/button/button";
+import * as Yup from 'yup';
+
+
+const categorySchema = Yup.object({
+  name: Yup.string()
+    .required('Name is required')
+
+});
 
 export const Category = () => {
-  const input = useInput<{ name: string }>();
+  const input = useInput({ schema: categorySchema });
   const [category, setcategory] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector((e: RootState) => e.category.data);
@@ -43,7 +51,7 @@ export const Category = () => {
       </div>
       <div className="py-2  mx-auto space-y-2">
         <div>Category List</div>
-        {state.length  > 0 ? state.map((e, index) => (
+        {state.length > 0 ? state.map((e, index) => (
           <div
             key={index}
             className="px-4 py-2 border border-gray-200 rounded-md shadow-sm bg-white hover:bg-gray-50 transition-colors"

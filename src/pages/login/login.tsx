@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { credentialI, Inputs } from '../../component/login/interface';
-import { useForm } from 'react-hook-form';
+import { credentialI } from '../../component/login/interface';
 import Textfiled from '../../component/textfiled';
 import useInput from '../../hooks/input';
 import Button from '../../component/button/button';
+import * as Yup from 'yup';
+
+
+const schema = Yup.object({
+  email: Yup.string()
+    .required('Email is required')
+    .email('Enter a valid email address'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(7, 'Password must be at atleast 7 characters')
+    .max(10, 'Password limit exceed'),
+});
+
 
 const Login = () => {
   const [credential, setCredential] = useState<credentialI>({});
   const [error, setError] = useState<string | null>(null);
   const email = "shikharkhadka@gmail.com"
   const password = "password";
-  const input = useInput<Inputs>();
+  const input = useInput({ schema: schema });
   const navigate = useNavigate();
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {

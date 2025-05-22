@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../component/button/button";
 import Textfiled from "../../component/textfiled";
 import useInput from "../../hooks/input";
-import { BlogI, post } from "./blogslice";
+import { BlogI } from "./blogslice";
 import Dropdown from "../../component/dropdown/dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -10,9 +10,19 @@ import { fetch } from "../category/categoryslice";
 import TextArea from "../../component/textarea/textarea";
 import { postBlog } from "../../services/services";
 import { useNavigate } from "react-router";
+import * as Yup from 'yup';
+
+
+const blogSchema = Yup.object({
+  "title": Yup.string().required("Title is required"),
+  "author": Yup.string().required("Author is required"),
+  "category": Yup.string().required("Category is required"),
+  "body": Yup.string().required("Body is required"),
+
+});
 
 export const AddBlog = () => {
-  const input = useInput<BlogI>();
+  const input = useInput({ schema: blogSchema });
   const [isOn, setIsOn] = useState(true);
   const [tags, setTag] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState<string>("");
@@ -72,7 +82,7 @@ export const AddBlog = () => {
   }, [blog.status]);
 
   return (
-    <div  className="w-full">
+    <div className="w-full">
       <form onSubmit={input.handleSubmit(onSubmit)}>
         <div className=" mx-auto p-6 rounded-xl space-y-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Add Blog</h2>
@@ -176,7 +186,7 @@ export const AddBlog = () => {
 
           <div className="space-y-2">
             <button
-            type="button"
+              type="button"
               onClick={() => {
                 if (fileInputRef.current) {
                   fileInputRef.current.click();

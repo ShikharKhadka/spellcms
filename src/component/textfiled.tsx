@@ -32,7 +32,7 @@ const Textfiled = ({
   return (
     <div>
       <input
-        className={`border-2 p-2 rounded-md mb-1 ${ fullWidth ? "w-full" : "w-[35%]"}  ${input.errors[validationName] ? "border-red-500" : "border-gray-300"
+        className={`border-2 p-2 rounded-md mb-1 ${fullWidth ? "w-full" : "w-[35%]"}  ${input.errors[validationName] ? "border-red-500" : "border-gray-300"
           }`}
         {...input.register(validationName, {
           required: true,
@@ -41,8 +41,8 @@ const Textfiled = ({
         placeholder={placeholder}
       />
       <div className="h-5">
-        {input.errors[validationName]?.type === "required" && !value && (
-          <div className="text-red-500 text-sm">This field is required</div>
+        {input.errors[validationName] && (
+          <div className="text-red-500 text-sm">{input.errors[validationName]?.message?.toString() ?? ""}</div>
         )}
       </div>
     </div>
